@@ -36,6 +36,7 @@ const reviewer = [
   const button = document.getElementsByClassName('random-btn');
   const arrow = document.querySelectorAll('.fas');
   let item = 0;
+  let btn;
 
   function getReviewer(item) {
     author.textContent = reviewer[item].name;
@@ -69,8 +70,8 @@ const reviewer = [
     })
   });
 
-  for (var i = 0; i < button.length; i++) {
-    var btn = button[0];
+  for (let i = 0; i < button.length; i++) {
+    btn = button[0];
   };
 
   btn.addEventListener('click', function() {
