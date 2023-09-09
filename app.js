@@ -35,69 +35,48 @@ const reviewer = [
   const text = document.getElementById('info');
   const button = document.getElementsByClassName('random-btn');
   const arrow = document.querySelectorAll('.fas');
+  let item = 0;
 
-  var item = 0;
+  function getReviewer(item) {
+    author.textContent = reviewer[item].name;
+    job.textContent = reviewer[item].job;
+    text.textContent = reviewer[item].text;
+    document.getElementById("person-img").src= reviewer[item].img;
+  };
 
-  author.textContent = reviewer[item].name;
-  job.textContent = reviewer[item].job;
-  text.textContent = reviewer[item].text;
-  document.getElementById("person-img").src= reviewer[item].img;
+  getReviewer(0);
 
   arrow.forEach(function(arrows){
     arrows.addEventListener('click', function(arr) {
-          console.log('Item: ' + item);
       newClick = arr.currentTarget.classList;
       if (newClick.contains('fa-chevron-right')) {
         if (item == 3) {
-          author.textContent = reviewer[0].name;
-          job.textContent = reviewer[0].job;
-          text.textContent = reviewer[0].text;
-          document.getElementById("person-img").src= reviewer[0].img;
+          getReviewer(0);
           item = 0;
         } else if (item < 3) {
           item++;
-          console.log(item);
-          author.textContent = reviewer[item].name;
-          job.textContent = reviewer[item].job;
-          text.textContent = reviewer[item].text;
-          document.getElementById("person-img").src= reviewer[item].img;
+          getReviewer(item);
         } 
       } else {
         if (item == 0) {
-          author.textContent = reviewer[3].name;
-          job.textContent = reviewer[3].job;
-          text.textContent = reviewer[3].text;
-          document.getElementById("person-img").src= reviewer[3].img;
+          getReviewer(3);
           item = 3;
         } else if (item <= 3) {
           item--;
-          console.log(item);
-          author.textContent = reviewer[item].name;
-          job.textContent = reviewer[item].job;
-          text.textContent = reviewer[item].text;
-          document.getElementById("person-img").src= reviewer[item].img;
+          getReviewer(item);
         }
       }
     })
   });
 
   for (var i = 0; i < button.length; i++) {
-    var btn;
-    btn = button[0];
+    var btn = button[0];
   };
 
   btn.addEventListener('click', function() {
-    function numb() { // BIAR GAK NGEREPEAT ANGKA YANG SAMA DIAPAIN YA
-      var numbRandom; // JUJUR GA NGERTI INI GUNANYA APA
-      numbRandom = Math.floor(Math.random() * reviewer.length); 
-  
-      return numbRandom; // JUJUR GA NGERTI INI GUNANYA APA
+    function numb() {
+      return Math.floor(Math.random() * reviewer.length); 
     }
-
-    console.log('Item: ' + item);
-    item = numb(); // APAKAH HARUS MEMBUAT KONDISI BARU BIAR GAK REPEAT
-    author.textContent = reviewer[item].name;
-    job.textContent = reviewer[item].job;
-    text.textContent = reviewer[item].text;
-    document.getElementById("person-img").src= reviewer[item].img;
+    item = numb();
+    getReviewer(item);
   });
